@@ -70,20 +70,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="header-text">
-                        <?php 
-                        $top_banner = new WP_Query(['post_type' => 'top_banner']); ?>
-    
-    
+                        <div class="header-text">    
                             <h1><?php echo $main_title; ?></h1>
                             <p><?php echo $main_content ?></p>
                             <a href="<?php $left_btn_url; ?>"><button><?php echo $left_btn_text; ?></button></a>
-
                             <a href="<?php echo $right_btn_url; ?>"><button><?php echo $right_btn_text; ?></button></a>
-                                <!-- pagination here -->
-                        <!-- end of the loop -->
-                     
-                        <?php wp_reset_postdata(); ?>
 
                         </div>
                     </div>
@@ -132,14 +123,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
-                    <?php 
-                    $how_it_works = new WP_Query(['post_type' => 'how_it_works', 'posts_per_page' => 3]); ?>
-                    <?php if ( $how_it_works->have_posts()):
-                        while ($how_it_works->have_posts()) : $how_it_works->the_post();
-                            $video_id = get_post_meta( $post->ID, "video_id", true );
-                    ?>
+                    
                         <div class="work-images">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/<?php echo $video_id ?>" frameborder="0" allowfullscreen></iframe>
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/<?php echo $video_id; ?>" frameborder="0" allowfullscreen></iframe>
                             <div class="overlay-text">
                                 <i class="material-icons">play_circle_filled</i>
                             </div>
@@ -152,11 +138,9 @@
                             <div class="work-text">
                     
                     
-                    <h2><?php the_title() ?></h2>
-                    <?php the_content() ?>
-                    <?php endwhile; ?>
-                    <?php wp_reset_postdata(); ?>
-                    <?php endif; ?>
+                    <h2><?php echo $hit_title; ?></h2>
+                    <p><?php echo $hit_content; ?></p>
+
                             </div>
                         </div>
                     </div>
