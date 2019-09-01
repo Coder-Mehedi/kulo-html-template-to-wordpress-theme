@@ -1,7 +1,7 @@
 <?php 
 require_once 'custom_post_type.php';
 require_once 'meta_boxes.php';
-
+require_once 'query.php';
 // add_filter('use_block_editor_for_post', '__return_false', 10);
 
 function kulo_theme_files() {
@@ -132,34 +132,3 @@ function kulo_widgets_init() {
 
 }
 add_action( 'widgets_init', 'kulo_widgets_init' );
-
-
-function banner_btn_meta_box( $meta_boxes ) {
-	$prefix = 'prefix-';
-
-	$meta_boxes[] = array(
-		'id' => 'banner_buttons',
-		'title' => esc_html__( 'Banner Left Button', 'esoftkulo' ),
-		'post_types' => array('post' ),
-		'context' => 'normal',
-		'priority' => 'default',
-		'autosave' => 'false',
-		'fields' => array(
-			array(
-				'id' => $prefix . 'left_button_text',
-				'type' => 'text',
-				'name' => esc_html__( 'Left Button Text', 'esoftkulo' ),
-				'desc' => esc_html__( 'Left Button Text', 'esoftkulo' ),
-			),
-			array(
-				'id' => $prefix . 'left_button_url',
-				'type' => 'url',
-				'name' => esc_html__( 'Left Button URL', 'esoftkulo' ),
-				'desc' => esc_html__( 'Left Button URL', 'esoftkulo' ),
-			),
-		),
-	);
-
-	return $meta_boxes;
-}
-add_filter( 'rwmb_meta_boxes', 'banner_btn_meta_box' );

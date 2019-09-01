@@ -19,7 +19,6 @@ function banner_btn_callback($post) {
 		<label>Right Button Text</label>
 		<input type="text" name="left_btn_text" value="<?php echo $left_btn_text ?>">
 
-
 	</p>
 
 <?php } ?>
@@ -51,4 +50,56 @@ function banner_save_meta($post_id) {
 }
 add_action( 'save_post', 'banner_save_meta' );
 
+
+
+function team_slider_meta_box( $meta_boxes ) {
+	$prefix = '';
+
+	$meta_boxes[] = array(
+		'id' => 'team',
+		'title' => esc_html__( 'team_meta', 'esoftkulo' ),
+		'post_types' => array('team_members'),
+		'context' => 'normal',
+		'priority' => 'default',
+		'autosave' => 'false',
+		'fields' => array(
+			array(
+				'id' => $prefix . 'fb',
+				'type' => 'url',
+				'name' => esc_html__( 'Facebook Profile URL', 'esoftkulo' ),
+				'placeholder' => esc_html__( 'Enter Facebook Profile URL', 'esoftkulo' ),
+			),
+			array(
+				'id' => $prefix . 'linkedin',
+				'type' => 'url',
+				'name' => esc_html__( 'LinkedIn Profile URL', 'esoftkulo' ),
+				'placeholder' => esc_html__( 'Enter LinkedIn Profile URL', 'esoftkulo' ),
+			),
+			array(
+				'id' => $prefix . 'dribbble',
+				'type' => 'url',
+				'name' => esc_html__( 'Dribbble Profile URL', 'esoftkulo' ),
+				'placeholder' => esc_html__( 'Enter Dribbble Profile URL', 'esoftkulo' ),
+			),
+			array(
+				'id' => $prefix . 'behance',
+				'type' => 'url',
+				'name' => esc_html__( 'Behance Profile URL', 'esoftkulo' ),
+				'placeholder' => esc_html__( 'Enter Behance Profile URL', 'esoftkulo' ),
+			),
+			array(
+				'id' => $prefix . 'google_plus',
+				'type' => 'url',
+				'name' => esc_html__( 'Google+ Profile URL', 'esoftkulo' ),
+				'placeholder' => esc_html__( 'Enter Google+ Profile URL', 'esoftkulo' ),
+			),
+		),
+	);
+
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'team_slider_meta_box' );
+
+
 ?>
+

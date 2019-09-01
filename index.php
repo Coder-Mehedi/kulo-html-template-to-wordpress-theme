@@ -6,22 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Digital Agency Template</title>
     <link href="https://fonts.googleapis.com/css?family=Croissant+One" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,900" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <?php wp_head() ?>
 </head>
 
 <body>
     <div class="wrapper">
-        <?php 
-        $top_banner = new WP_Query(['post_type' => 'top_banner']); ?>
-         
-        <?php if ( $top_banner->have_posts() ) : ?>
-        <?php while ( $top_banner->have_posts() ) : $top_banner->the_post(); ?>
 
-        <header class="header" style="background: url(<?php echo the_post_thumbnail_url(); ?>);">
-        <?php endwhile ?>
-    <?php endif ?>
+        <header class="header" style="background: url(<?php echo $background_url; ?>);">
+
             <div class="blue">
                 <img src="<?php echo get_template_directory_uri(); ?>/img/header-shepe-blue.png" alt="">
             </div>
@@ -69,13 +65,6 @@
                             'depth'           => 3,
                             'walker'          => '',
                         ) ); ?>
-                            <!-- <ul class="nav navbar-nav">
-                                <li class="active"><a href="#">About</a></li>
-                                <li><a href="#">Features</a></li>
-                                <li><a href="#">Pricing</a></li>
-                                <li><a href="#">Team</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul> -->
                         </div>
                     </div>
                 </div>
@@ -84,58 +73,28 @@
                         <div class="header-text">
                         <?php 
                         $top_banner = new WP_Query(['post_type' => 'top_banner']); ?>
-                         
-                        <?php if ( $top_banner->have_posts() ) : ?>
-                        <?php
-                        $left_btn_text = get_post_meta( $post->ID, 'left_btn_text',true );
-                        $left_btn_url = get_post_meta( $post->ID, 'left_btn_url',true );
-
-                        $right_btn_text = get_post_meta( $post->ID, 'right_btn_text',true );
-                        $right_btn_url = get_post_meta( $post->ID, 'right_btn_url',true );
-
-                         ?>
-                         
-                            <!-- the loop -->
-                            <?php while ( $top_banner->have_posts() ) : $top_banner->the_post(); ?>
     
-                            <h1><?php the_title(); ?></h1>
-                            <?php the_content() ?>
-                            <a href="<?php echo $left_btn_url; ?>"><button><?php echo $left_btn_text; ?></button></a>
+    
+                            <h1><?php echo $main_title; ?></h1>
+                            <p><?php echo $main_content ?></p>
+                            <a href="<?php $left_btn_url; ?>"><button><?php echo $left_btn_text; ?></button></a>
 
                             <a href="<?php echo $right_btn_url; ?>"><button><?php echo $right_btn_text; ?></button></a>
                                 <!-- pagination here -->
-                        <?php endwhile; ?>
                         <!-- end of the loop -->
                      
                         <?php wp_reset_postdata(); ?>
-                     
-                        <?php else : ?>
-                            <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-                        <?php endif; ?>
+
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="another-text">
-                            <?php 
-                        $steps = new WP_Query(['post_type' => 'steps']); ?>
-                         
-                        <?php if ( $steps->have_posts() ) : ?>
-                         
-                            <!-- the loop -->
-                            <?php while ( $steps->have_posts() ) : $steps->the_post(); ?>            
-                            <h3><?php the_title() ?></h3>
-                            <?php the_content() ?>
+                                  
+                            <h3><?php echo $steps_title ?></h3>
+                            <p><?php echo $steps_content ?></p>
 
-                        <?php endwhile; ?>
-                        <!-- end of the loop -->
-                     
-                        <?php wp_reset_postdata(); ?>
-                     
-                        <?php else : ?>
-                            <p><?php _e( 'Sorry, no posts matched your criteria.' ); ?></p>
-                        <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -257,6 +216,11 @@
                     $team_members = new WP_Query(['post_type' => 'team_members', 'posts_per_page' => 3]); ?>
                     <?php if ( $team_members->have_posts()):
                         while ($team_members->have_posts()) : $team_members->the_post();
+                            $fb_url = get_post_meta( $post->ID, 'fb',true );
+                            $linkedin_url = get_post_meta( $post->ID, 'linkedin',true );
+                            $dribbble_url = get_post_meta( $post->ID, 'dribbble',true );
+                            $behance_url = get_post_meta( $post->ID, 'behance',true );
+                            $google_plus_url = get_post_meta( $post->ID, 'google_plus',true );
                     ?>
                     
                             <div class="item">
@@ -265,7 +229,12 @@
                                 <div class="item-text">
                                     <h3><?php the_title() ?></h3>
                                     <h4><?php echo get_the_content(); ?></h4>
-                                    <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></p>
+                                    <p><a href="<?php echo $fb_url; ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                        <a href="<?php echo $linkedin_url ?>"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                                        <a href="<?php echo $dribbble_url ?>"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                                        <a href="<?php echo $behance_url ?>"><i class="fa fa-behance" aria-hidden="true"></i></a>
+                                        <a href="<?php echo $google_plus_url ?>"><i class="fa fa-google-plus" aria-hidden="true"></i>
+                                        </a></p>
                                 </div>
                             </div>
 
@@ -295,6 +264,7 @@
                     </div>
                     <div class="col-md-8 col-sm-12">
                         <div class="contact-form">
+                            <!-- <?php echo do_shortcode( '[contact-form-7 id="429" title="Kulo Contact"]' ); ?> -->
                             <form action="#" method="post">
                                 <div class="first">
                                     <input type="text" name="" placeholder="First Name">
