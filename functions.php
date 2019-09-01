@@ -1,5 +1,8 @@
 <?php 
-add_filter('use_block_editor_for_post', '__return_false', 10);
+require_once 'custom_post_type.php';
+require_once 'meta_boxes.php';
+
+// add_filter('use_block_editor_for_post', '__return_false', 10);
 
 function kulo_theme_files() {
 	wp_enqueue_style( 'bootStrap', get_template_directory_uri(). '/css/bootstrap.css', array(), '1.0' , 'all' );
@@ -83,13 +86,47 @@ function kulo_widgets_init() {
 
 	register_sidebar(
 		array(
-			'name'          => __( 'Primary Sidebar', 'esoftkulo' ),
-			'id'            => 'sidebar-1',
+			'name'          => __( 'Footer One', 'esoftkulo' ),
+			'id'            => 'footer-1',
 			'description'   => __( 'Add widgets here to appear in your footer.', 'esoftkulo' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
+			'before_widget' => '<div id="%1$s" class="col-md-3 col-sm-6 col-xs-6 %2$s"><div class="footer-text-single">',
+			'after_widget'  => '</div></div>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		)
+	);
+
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer Two', 'esoftkulo' ),
+			'id'            => 'footer-2',
+			'description'   => __( 'Add widgets here to appear in your footer.', 'esoftkulo' ),
+			'before_widget' => '<div id="%1$s" class="col-md-3 col-sm-6 col-xs-6 %2$s"><div class="footer-text-single">',
+			'after_widget'  => '</div></div>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer Three', 'esoftkulo' ),
+			'id'            => 'footer-3',
+			'description'   => __( 'Add widgets here to appear in your footer.', 'esoftkulo' ),
+			'before_widget' => '<div id="%1$s" class="col-md-3 col-sm-6 col-xs-6 %2$s"><div class="footer-text-single">',
+			'after_widget'  => '</div></div>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => __( 'Footer Four', 'esoftkulo' ),
+			'id'            => 'footer-4',
+			'description'   => __( 'Add widgets here to appear in your footer.', 'esoftkulo' ),
+			'before_widget' => '<div id="%1$s" class="col-md-3 col-sm-6 col-xs-6 %2$s"><div class="footer-text-single">',
+			'after_widget'  => '</div></div>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
 		)
 	);
 
@@ -97,127 +134,32 @@ function kulo_widgets_init() {
 add_action( 'widgets_init', 'kulo_widgets_init' );
 
 
-function cptui_register_my_cpts_top_banner() {
+function banner_btn_meta_box( $meta_boxes ) {
+	$prefix = 'prefix-';
 
-	/**
-	 * Post Type: Top Banners.
-	 */
-
-	$labels = array(
-		"name" => __( "Top Banners", "esoftkulo" ),
-		"singular_name" => __( "Top Banner", "esoftkulo" ),
+	$meta_boxes[] = array(
+		'id' => 'banner_buttons',
+		'title' => esc_html__( 'Banner Left Button', 'esoftkulo' ),
+		'post_types' => array('post' ),
+		'context' => 'normal',
+		'priority' => 'default',
+		'autosave' => 'false',
+		'fields' => array(
+			array(
+				'id' => $prefix . 'left_button_text',
+				'type' => 'text',
+				'name' => esc_html__( 'Left Button Text', 'esoftkulo' ),
+				'desc' => esc_html__( 'Left Button Text', 'esoftkulo' ),
+			),
+			array(
+				'id' => $prefix . 'left_button_url',
+				'type' => 'url',
+				'name' => esc_html__( 'Left Button URL', 'esoftkulo' ),
+				'desc' => esc_html__( 'Left Button URL', 'esoftkulo' ),
+			),
+		),
 	);
 
-	$args = array(
-		"label" => __( "Top Banners", "esoftkulo" ),
-		"labels" => $labels,
-		"description" => "",
-		"public" => true,
-		"publicly_queryable" => true,
-		"show_ui" => true,
-		"delete_with_user" => false,
-		"show_in_rest" => true,
-		"rest_base" => "",
-		"rest_controller_class" => "WP_REST_Posts_Controller",
-		"has_archive" => false,
-		"show_in_menu" => true,
-		"show_in_nav_menus" => true,
-		"exclude_from_search" => false,
-		"capability_type" => "post",
-		'capabilities' => array(
-		    'create_posts' => 'do_not_allow'
-		  ),
-		"map_meta_cap" => true,
-		"hierarchical" => false,
-		"rewrite" => array( "slug" => "top_banner", "with_front" => true ),
-		"query_var" => true,
-		"supports" => array( "title", "editor", "custom-fields", "thumbnail", "page-attributes" )
-	);
-
-	register_post_type( "top_banner", $args );
+	return $meta_boxes;
 }
-
-add_action( 'init', 'cptui_register_my_cpts_top_banner' );
-
-
-function cptui_register_my_cpts_steps() {
-
-	/**
-	 * Post Type: Steps.
-	 */
-
-	$labels = array(
-		"name" => __( "Steps", "esoftkulo" ),
-		"singular_name" => __( "Step", "esoftkulo" ),
-		"edit_item" => __( "Edit Item", "esoftkulo" ),
-		"featured_image" => __( "Image for this item", "esoftkulo" ),
-	);
-
-	$args = array(
-		"label" => __( "Steps", "esoftkulo" ),
-		"labels" => $labels,
-		"description" => "",
-		"public" => true,
-		"publicly_queryable" => true,
-		"show_ui" => true,
-		"delete_with_user" => false,
-		"show_in_rest" => true,
-		"rest_base" => "",
-		"rest_controller_class" => "WP_REST_Posts_Controller",
-		"has_archive" => false,
-		"show_in_menu" => true,
-		"show_in_nav_menus" => true,
-		"exclude_from_search" => false,
-		"capability_type" => "post",
-		"map_meta_cap" => true,
-		"hierarchical" => false,
-		"rewrite" => array( "slug" => "steps", "with_front" => true ),
-		"query_var" => true,
-		"supports" => array( "title", "editor", "thumbnail" ),
-	);
-
-	register_post_type( "steps", $args );
-}
-
-add_action( 'init', 'cptui_register_my_cpts_steps' );
-
-
-
-function cptui_register_my_cpts_step_items() {
-
-	/**
-	 * Post Type: Step Items.
-	 */
-
-	$labels = array(
-		"name" => __( "Step Items", "esoftkulo" ),
-		"singular_name" => __( "Step Item", "esoftkulo" ),
-	);
-
-	$args = array(
-		"label" => __( "Step Items", "esoftkulo" ),
-		"labels" => $labels,
-		"description" => "",
-		"public" => true,
-		"publicly_queryable" => true,
-		"show_ui" => true,
-		"delete_with_user" => false,
-		"show_in_rest" => true,
-		"rest_base" => "",
-		"rest_controller_class" => "WP_REST_Posts_Controller",
-		"has_archive" => false,
-		"show_in_menu" => true,
-		"show_in_nav_menus" => true,
-		"exclude_from_search" => false,
-		"capability_type" => "post",
-		"map_meta_cap" => true,
-		"hierarchical" => false,
-		"rewrite" => array( "slug" => "step_items", "with_front" => true ),
-		"query_var" => true,
-		"supports" => array( "title", "editor", "custom-fields", "thumbnail" ),
-	);
-
-	register_post_type( "step_items", $args );
-}
-
-add_action( 'init', 'cptui_register_my_cpts_step_items' );
+add_filter( 'rwmb_meta_boxes', 'banner_btn_meta_box' );

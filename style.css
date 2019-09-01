@@ -896,11 +896,18 @@ div.wrapper section.portfolia div.penination a{
     font-weight: 400;
     color: #fff;
 }
+.wrapper footer.footer .footer-text .footer-text-single ul li {
+    list-style: none;
+    margin-left: -40px;
+}
 
-.wrapper footer.footer .footer-text .footer-text-single p a {
+
+.wrapper footer.footer .footer-text .footer-text-single ul li a {
     font-family: "Raleway", sans-serif;
     font-size: 15px;
     font-weight: 600;
     color: #4c797d;
     text-decoration: none;
+
 }
+

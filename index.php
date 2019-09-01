@@ -173,8 +173,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
+                    <?php 
+                    $how_it_works = new WP_Query(['post_type' => 'how_it_works', 'posts_per_page' => 3]); ?>
+                    <?php if ( $how_it_works->have_posts()):
+                        while ($how_it_works->have_posts()) : $how_it_works->the_post();
+                            $video_id = get_post_meta( $post->ID, "video_id", true );
+                    ?>
                         <div class="work-images">
-                            <!-- <iframe width="100%" height="100%" src="https://www.youtube.com/embed/HZRp6iRjnhQ" frameborder="0" allowfullscreen></iframe> -->
+                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/<?php echo $video_id ?>" frameborder="0" allowfullscreen></iframe>
                             <div class="overlay-text">
                                 <i class="material-icons">play_circle_filled</i>
                             </div>
@@ -185,8 +191,13 @@
                     <div class="col-md-5">
                         <div class="work-text-full">
                             <div class="work-text">
-                                <h2>How It Works?</h2>
-                                <p>Its Simple. Check the video to understand How it works. Lorem Ipsum Dolor Sit Amet.</p>
+                    
+                    
+                    <h2><?php the_title() ?></h2>
+                    <?php the_content() ?>
+                    <?php endwhile; ?>
+                    <?php wp_reset_postdata(); ?>
+                    <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -242,60 +253,26 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="my-claint owl-carousel owl-theme">
+                            <?php 
+                    $team_members = new WP_Query(['post_type' => 'team_members', 'posts_per_page' => 3]); ?>
+                    <?php if ( $team_members->have_posts()):
+                        while ($team_members->have_posts()) : $team_members->the_post();
+                    ?>
+                    
                             <div class="item">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/team-member1.png" alt="">
+                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
                                 <div class="item-overlay"></div>
                                 <div class="item-text">
-                                    <h3>Kabbo Liate</h3>
-                                    <h4>UX/UI Designer</h4>
+                                    <h3><?php the_title() ?></h3>
+                                    <h4><?php echo get_the_content(); ?></h4>
                                     <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></p>
                                 </div>
                             </div>
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/team-member2.png" alt="">
-                                <div class="item-overlay"></div>
-                                <div class="item-text">
-                                    <h3>Kabbo Liate</h3>
-                                    <h4>UX/UI Designer</h4>
-                                    <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/team-member3.png" alt="">
-                                <div class="item-overlay"></div>
-                                <div class="item-text">
-                                    <h3>Kabbo Liate</h3>
-                                    <h4>UX/UI Designer</h4>
-                                    <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/team-member1.png" alt="">
-                                <div class="item-overlay"></div>
-                                <div class="item-text">
-                                    <h3>Kabbo Liate</h3>
-                                    <h4>UX/UI Designer</h4>
-                                    <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/team-member2.png" alt="">
-                                <div class="item-overlay"></div>
-                                <div class="item-text">
-                                    <h3>Kabbo Liate</h3>
-                                    <h4>UX/UI Designer</h4>
-                                    <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></p>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri(); ?>/img/team-member3.png" alt="">
-                                <div class="item-overlay"></div>
-                                <div class="item-text">
-                                    <h3>Kabbo Liate</h3>
-                                    <h4>UX/UI Designer</h4>
-                                    <p><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></p>
-                                </div>
-                            </div>
+
+                            <?php endwhile; ?>
+                    <?php wp_reset_postdata(); ?>
+                    <?php endif; ?>
+
                         </div>
                     </div>
                 </div>
@@ -358,42 +335,11 @@
                     <div class="col-md-8">
                         <div class="footer-text">
                             <div class="row">
-                                <div class="col-md-3 col-sm-6 col-xs-6">
-                                    <div class="footer-text-single">
-                                        <h3>About Us</h3>
-                                        <p><a href="#">Our Team</a></p>
-                                        <p><a href="#">Company</a></p>
-                                        <p><a href="#">Jobs</a></p>
-                                        <p><a href="#">Newsletter</a></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 col-xs-6">
-                                    <div class="footer-text-single">
-                                        <h3>Help Center</h3>
-                                        <p><a href="#">Documentations</a></p>
-                                        <p><a href="#">Tutorials</a></p>
-                                        <p><a href="#">Term Of Use</a></p>
-                                        <p><a href="#">Privecy Policy</a></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 col-xs-6">
-                                    <div class="footer-text-single">
-                                        <h3>Tools</h3>
-                                        <p><a href="#">Create Account</a></p>
-                                        <p><a href="#">Log In</a></p>
-                                        <p><a href="#">Services</a></p>
-                                        <p><a href="#">Sitemap</a></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3 col-sm-6 col-xs-6">
-                                    <div class="footer-text-single">
-                                        <h3>Get In Touch</h3>
-                                        <p><a href="#">Contact Us</a></p>
-                                        <p><a href="#">Request A Demo</a></p>
-                                        <p><a href="#">+12 323 323 323</a></p>
-                                        <p><a href="#">support@gmail.com</a></p>
-                                    </div>
-                                </div>
+                                <?php dynamic_sidebar( 'footer-1' ); ?>
+                                <?php dynamic_sidebar( 'footer-2' ); ?>
+                                <?php dynamic_sidebar( 'footer-3' ); ?>
+                                <?php dynamic_sidebar( 'footer-4' ); ?>
+                                
                             </div>
                         </div>
                     </div>
