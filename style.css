@@ -264,7 +264,7 @@ a.site-name{
     position: relative;
 }
 
-.wrapper section.development .design-development i::after {
+.wrapper section.development .design-development i span.after {
     border: 1px solid #f48fb1;
     content: "";
     height: 120px;
@@ -275,7 +275,7 @@ a.site-name{
     border-radius: 50%;
 }
 
-.wrapper section.development .design-development i::before {
+.wrapper section.development .design-development i span.before {
     border: 1px solid #f48fb1;
     content: "";
     height: 140px;
@@ -290,8 +290,8 @@ a.site-name{
     background: #0ceac5;
 }
 
-.wrapper section.development .design-development.one i::after,
-.wrapper section.development .design-development.one i::before {
+.wrapper section.development .design-development.one i span.after,
+.wrapper section.development .design-development.one i span.before {
     border: 1px solid #0ceac5;
 }
 

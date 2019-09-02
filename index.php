@@ -35,10 +35,14 @@
         <div class="row">
     <?php if ( $step_items->have_posts()):
         while ($step_items->have_posts()) : $step_items->the_post();
-            $icon = get_post_meta( $post->ID, "icon", true ); ?>
+            $icon = get_post_meta( $post->ID, "icon", true );
+            $background_color = get_post_meta( $post->ID, "background_color", true ); ?>
             <div class="col-md-4 col-sm-4">
                 <div class="design-development one">
-                    <i class="material-icons"><?php echo $icon; ?></i>
+                    <i class="material-icons" style="background: <?php echo $background_color; ?>"><?php echo $icon; ?>
+                    <span class="before" style="border: 1px solid <?php echo $background_color ?>">
+                    </span>
+                    <span class="after" style="border: 1px solid <?php echo $background_color; ?>"></span></i>
                     <h2><?php the_title() ?></h2>
                     <?php the_content() ?>
                 </div>
