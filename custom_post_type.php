@@ -117,7 +117,7 @@ function cptui_register_my_cpts_step_items() {
 		"hierarchical" => false,
 		"rewrite" => array( "slug" => "step_items", "with_front" => true ),
 		"query_var" => true,
-		"supports" => array( "title", "editor", "custom-fields", "thumbnail" ),
+		"supports" => array( "title", "editor", "thumbnail" ),
 	);
 
 	register_post_type( "step_items", $args );
@@ -158,7 +158,7 @@ function cptui_register_my_cpts_how_it_works() {
 		"hierarchical" => false,
 		"rewrite" => array( "slug" => "how_it_works", "with_front" => true ),
 		"query_var" => true,
-		"supports" => array( "title", "editor", "custom-fields", "thumbnail" ),
+		"supports" => array( "title", "editor", "thumbnail" ),
 	);
 
 	register_post_type( "how_it_works", $args );

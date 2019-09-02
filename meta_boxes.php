@@ -101,5 +101,51 @@ function team_slider_meta_box( $meta_boxes ) {
 add_filter( 'rwmb_meta_boxes', 'team_slider_meta_box' );
 
 
+function stepIconColor_meta_box( $meta_boxes ) {
+	$meta_boxes[] = array(
+		'id' => 'stepiconcolor',
+		'title' => esc_html__( 'Color Selection', 'esoftkulo' ),
+		'post_types' => array('step_items'),
+		'context' => 'normal',
+		'priority' => 'default',
+		'autosave' => 'false',
+		'fields' => array(
+			array(
+				'id' => 'background_color',
+				'name' => esc_html__( 'Set Icon Color', 'esoftkulo' ),
+				'type' => 'color',
+			),
+			array(
+				'id' => 'icon',
+				'type' => 'text',
+				'name' => esc_html__( 'Set Icon', 'esoftkulo' ),
+				'desc' => esc_html__( 'You can choose icon from this source https://material.io/resources/icons', 'esoftkulo' ),
+				'std' => 'code',
+			),
+		),
+	);
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'stepIconColor_meta_box' );
+function how_it_work_meta_box( $meta_boxes ) {
+	$meta_boxes[] = array(
+		'id' => 'howitworks',
+		'title' => esc_html__( 'How It Works', 'esoftkulo' ),
+		'post_types' => array('how_it_works'),
+		'context' => 'normal',
+		'priority' => 'default',
+		'autosave' => 'false',
+		'fields' => array(
+			array(
+				'id' => 'video_id',
+				'type' => 'url',
+				'name' => esc_html__( 'Youtube Video URL', 'esoftkulo' ),
+			),
+		),
+	);
+	return $meta_boxes;
+}
+add_filter( 'rwmb_meta_boxes', 'how_it_work_meta_box' );
+
 ?>
 

@@ -183,29 +183,8 @@
             </div>
             <div class="col-md-8 col-sm-12">
                 <div class="contact-form">
-                    <!-- <?php echo do_shortcode( '[contact-form-7 id="429" title="Kulo Contact"]' ); ?> -->
-                    <form action="#" method="post">
-                        <div class="first">
-                            <input type="text" name="" placeholder="First Name">
-                        </div>
-                        <div class="last">
-                            <input type="text" name="" placeholder="Last Name">
-                        </div>
-                        <div class="email">
-                            <input type="email" name="" placeholder="Email Address">
-                        </div>
-                        <div class="message">
-                            <textarea placeholder="Your Message"></textarea>
-                        </div>
-                        <div class="checkbox-submit">
-                            <div class="checkbox">
-                                <label><input type="checkbox" name="" checked> Allow Newsletter</label>
-                            </div>
-                            <div class="submit">
-                                <input type="submit" value="SEND">
-                            </div>
-                        </div>
-                    </form>
+                    <?php echo do_shortcode( '[contact-form-7 id="429" title="Kulo Contact"]' ); ?>
+                    
                 </div>
             </div>
         </div>
